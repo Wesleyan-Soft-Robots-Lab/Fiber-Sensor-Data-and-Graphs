@@ -12,7 +12,13 @@ input_ameteks = [\
                 #'sensor fibers\oldthread_sensorfiber_repaired_5x_20percentstrain2024-12-19_14-43-38.csv',\
                 #'sensor fibers\oldthread_sensorfiber_repaired_5x_30percent_2024-12-19_15-09-43.csv'
                 #'conductive thread\oldthread_30percent_5x_ametek_formatted.csv'
-                'Sensor fiber characterization/baked/baked_2_2025-03-23_22-08-40.csv'
+                #'Sensor fiber characterization/baked/baked_2_2025-03-23_22-08-40.csv'
+                #'Sensor fiber characterization/baked/baked_3_2025-03-24_11-00-10.csv'
+                #'Sensor fiber characterization/baked/baked_4_2025-03-24_13-02-55.csv'
+                #'Sensor fiber characterization/humidified/humid_1_2025-03-24_14-23-39.csv'
+                #'Sensor fiber characterization/humidified/humid_2_2025-03-24_15-34-23.csv'
+                #'Sensor fiber characterization/humidified/humid_3_2025-03-24_16-56-56.csv'
+                'Sensor fiber characterization/humidified/humid_4_2025-03-24_18-56-42.csv'
                 ]
 input_dmms = [\
              #'sensor fibers/oldthread_sensorfiber_5x_1-dmm-11.csv',\
@@ -24,7 +30,13 @@ input_dmms = [\
              #'sensor fibers\oldthread_sensorfiber_repaired_5x_20percentstrain-dmm-11.csv',\
              #'sensor fibers\oldthread_sensorfiber_repaired_5x_30percentstrain-dmm-11.csv'
              #'conductive thread\oldthread_30percent_5x-dmm-11.csv'
-             'Sensor fiber characterization/baked/baked_2-dmm-11.csv'
+             #'Sensor fiber characterization/baked/baked_2-dmm-11.csv'
+             #'Sensor fiber characterization/baked/baked_3-dmm-11.csv'
+             #'Sensor fiber characterization/baked/baked_4-dmm-11.csv'
+             #'Sensor fiber characterization/humidified/humid_1-dmm-11.csv'
+             #'Sensor fiber characterization/humidified/humid_2-dmm-11.csv'
+             #'Sensor fiber characterization/humidified/humid_3-dmm-11.csv'
+             'Sensor fiber characterization/humidified/humid_4-dmm-11.csv'
              ]
 output_filenames = [\
                     #'sensor fibers\oldthread_sensorfiber_5x_1_synced.csv',\
@@ -34,7 +46,13 @@ output_filenames = [\
                     #'sensor fibers\oldthread_sensorfiber_5x_6_synced.csv',\
                     #'sensor fibers\oldthread_sensorfiber_500x_synced.csv',\
                     #'sensor fibers\oldthread_sensorfiber_repaired_5x_30percentstrain_synced.csv'
-                    'Sensor fiber characterization/baked/baked_2-synced.csv'
+                    #'Sensor fiber characterization/baked/baked_2-synced.csv'
+                    #'Sensor fiber characterization/baked/baked_3-synced.csv'
+                    #'Sensor fiber characterization/baked/baked_4-synced.csv'
+                    #'Sensor fiber characterization/humidified/humidified_1-synced.csv'
+                    #'Sensor fiber characterization/humidified/humidified_2-synced.csv'
+                    #'Sensor fiber characterization/humidified/humidified_3-synced.csv'
+                    'Sensor fiber characterization/humidified/humidified_4-synced.csv'
                     ]
 
 for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input_dmms, output_filenames):
@@ -52,7 +70,8 @@ for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input
 
     with open(ametek_filename, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        run = 2
+
+        run = 1
         for _ in range(run):
             next(reader)
 
@@ -62,7 +81,7 @@ for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input
         t0_ametek = datetime.strptime(row[3], "%H:%M:%S")
         dt = timedelta(days=0, seconds=0, milliseconds=10, microseconds=0)
 
-        for i in range(14):
+        for i in range(15):
             next(reader)
         
         for row in reader:
