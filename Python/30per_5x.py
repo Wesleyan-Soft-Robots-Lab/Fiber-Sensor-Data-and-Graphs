@@ -24,7 +24,7 @@ for i,file in enumerate(files):
     plt.plot(x[df['plot']],df[df['plot']]['res_change'], color=palette[i], label=name)
 
 # Plot design
-plt.arrow(0,2,2.25,2,head_width=.5,length_includes_head=False)
+plt.annotate("", xytext=(0, 1), xy=(1, 2.5), arrowprops=dict(arrowstyle="->"))
 plt.title('Sensor Fiber # 4')
 plt.legend()
 plt.xlabel('Strain (%)')

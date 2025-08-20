@@ -11,7 +11,8 @@ input_ameteks = [\
                 #'sensor fibers\oldthread_sensorfiber_500x_2024-12-20_09-31-04.csv',\
                 #'sensor fibers\oldthread_sensorfiber_repaired_5x_20percentstrain2024-12-19_14-43-38.csv',\
                 #'sensor fibers\oldthread_sensorfiber_repaired_5x_30percent_2024-12-19_15-09-43.csv'
-                'conductive thread\oldthread_30percent_5x_ametek_formatted.csv'
+                #'conductive thread\oldthread_30percent_5x_ametek_formatted.csv'
+                'Sensor fiber characterization/baked/baked_2_2025-03-23_22-08-40.csv'
                 ]
 input_dmms = [\
              #'sensor fibers/oldthread_sensorfiber_5x_1-dmm-11.csv',\
@@ -22,7 +23,8 @@ input_dmms = [\
              #'sensor fibers\oldthread_sensorfiber_500x-dmm-11.csv',\
              #'sensor fibers\oldthread_sensorfiber_repaired_5x_20percentstrain-dmm-11.csv',\
              #'sensor fibers\oldthread_sensorfiber_repaired_5x_30percentstrain-dmm-11.csv'
-             'conductive thread\oldthread_30percent_5x-dmm-11.csv'
+             #'conductive thread\oldthread_30percent_5x-dmm-11.csv'
+             'Sensor fiber characterization/baked/baked_2-dmm-11.csv'
              ]
 output_filenames = [\
                     #'sensor fibers\oldthread_sensorfiber_5x_1_synced.csv',\
@@ -31,8 +33,8 @@ output_filenames = [\
                     #'sensor fibers\oldthread_sensorfiber_5x_5_synced.csv',\
                     #'sensor fibers\oldthread_sensorfiber_5x_6_synced.csv',\
                     #'sensor fibers\oldthread_sensorfiber_500x_synced.csv',\
-                    'sensor fibers\oldthread_sensorfiber_repaired_5x_20percentstrain_synced.csv',\
-                    'sensor fibers\oldthread_sensorfiber_repaired_5x_30percentstrain_synced.csv'
+                    #'sensor fibers\oldthread_sensorfiber_repaired_5x_30percentstrain_synced.csv'
+                    'Sensor fiber characterization/baked/baked_2-synced.csv'
                     ]
 
 for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input_dmms, output_filenames):
@@ -50,12 +52,17 @@ for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input
 
     with open(ametek_filename, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        next(reader)
+        run = 2
+        for _ in range(run):
+            next(reader)
+
         row = next(reader)
+
+        print(f'Start time : {row[3]}')
         t0_ametek = datetime.strptime(row[3], "%H:%M:%S")
         dt = timedelta(days=0, seconds=0, milliseconds=10, microseconds=0)
 
-        for i in range(3):
+        for i in range(14):
             next(reader)
         
         for row in reader:

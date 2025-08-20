@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 dataPath = 'Sensor fiber characterization/5x runs/'
-palette = ['#4c3b01', '#7c003e', '#1b00cd', '#008383', '#c902e5', '#ff5e45']
+palette = ['#c902e5', '#693FB6','#405AA2','#038185','#008383']
 
 files = ['oldthread_30percent_5x_synced.csv',
          'oldthread_sensorfiber_5x_1_synced.csv',
@@ -26,9 +26,9 @@ for c in df['color'].unique():
     cycle = df[df['color'] == c]
     plt.plot(x[cycle.index], cycle['res_change'], color=palette[c], label=f' cycle {c+1}')
 
-
 # Plot design
-plt.arrow(0,2,2.25,2,head_width=.5,length_includes_head=False)
+plt.annotate("", xytext=(0, 1), xy=(1, 2.5),
+            arrowprops=dict(arrowstyle="->"))
 plt.title('Drift Over 5 Loading-Unloading Cycles')
 plt.legend()
 plt.xlabel('Strain (%)')
