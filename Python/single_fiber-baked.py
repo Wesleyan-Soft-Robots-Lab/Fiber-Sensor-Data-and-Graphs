@@ -2,18 +2,13 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-dataPath = 'Sensor fiber characterization/5x runs/'
+dataPath = 'Sensor fiber characterization/baked/'
+file ="baked_2-synced.csv"
 
 palette = ['#c902e5', '#693FB6','#405AA2','#038185','#008383']
 
-files = ['oldthread_30percent_5x_synced.csv',
-         'oldthread_sensorfiber_5x_1_synced.csv',
-         'oldthread_sensorfiber_5x_3_synced.csv',
-         'oldthread_sensorfiber_5x_4_synced.csv',
-         'oldthread_sensorfiber_5x_5_synced.csv',
-         'oldthread_sensorfiber_5x_6_synced.csv']
 
-df = pd.read_csv(os.path.join(dataPath,files[4]), header=None)
+df = pd.read_csv(os.path.join(dataPath, file), header=None)
 df['res_change'] = (df[3] - df[3][0])*(df[3][0]**-1) *100 #(Ri − R0) · (R0)^−1
 x = 30*df[1]/df[1].max() #scale to 30
 
@@ -31,9 +26,9 @@ for c in df['color'].unique():
 # Plot design
 plt.annotate("", xytext=(0, 1), xy=(1, 2.5),
             arrowprops=dict(arrowstyle="->"))
-plt.title('Drift Over 5 Loading-Unloading Cycles')
+plt.title('Baked Drift',fontsize=20)
 plt.legend()
-plt.xlabel('Strain (%)')
-plt.ylabel(u'Δ Resistance (%)')
+plt.xlabel('Strain (%)', fontsize=15)
+plt.ylabel(u'Δ Resistance (%)', fontsize=15)
 plt.grid()
 plt.show()

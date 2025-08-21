@@ -24,10 +24,10 @@ for i,file in enumerate(files):
     plt.plot(x[df['plot']],df[df['plot']]['res_change'], color=palette[i], label=name)
 
 # Plot design
-plt.annotate("", xytext=(0, 1), xy=(1, 2.5), arrowprops=dict(arrowstyle="->"))
-plt.title('Sensor Fiber # 4')
-plt.legend()
-plt.xlabel('Strain (%)')
-plt.ylabel(u'Δ Resistance (%)')
+plt.annotate("", xytext=(0, 2), xy=(4, 4), arrowprops=dict(arrowstyle="->"))
+plt.title('30 Percent Strain', fontsize=20)
+plt.legend(loc='upper left', fontsize=8.5)
+plt.xlabel('Strain (%)', fontsize=15)
+plt.ylabel(u'Δ Resistance (%)', fontsize=15)
 plt.grid()
 plt.show()
