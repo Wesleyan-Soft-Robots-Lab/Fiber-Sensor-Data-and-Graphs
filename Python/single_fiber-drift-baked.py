@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 dataPath = 'Sensor fiber characterization/baked/'
-file ="baked_2-synced.csv"
+file ="baked_4-synced.csv"
 
 palette = ['#c902e5', '#693FB6','#405AA2','#038185','#008383']
 
@@ -26,7 +26,7 @@ for c in df['color'].unique():
 # Plot design
 plt.annotate("", xytext=(0, 1), xy=(1, 2.5),
             arrowprops=dict(arrowstyle="->"))
-plt.title('Baked Drift',fontsize=20)
+plt.title('Drift Over Cycles (Baked)',fontsize=20)
 plt.legend()
 plt.xlabel('Strain (%)', fontsize=15)
 plt.ylabel(u'Δ Resistance (%)', fontsize=15)

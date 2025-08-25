@@ -18,7 +18,9 @@ input_ameteks = [\
                 #'Sensor fiber characterization/humidified/humid_1_2025-03-24_14-23-39.csv'
                 #'Sensor fiber characterization/humidified/humid_2_2025-03-24_15-34-23.csv'
                 #'Sensor fiber characterization/humidified/humid_3_2025-03-24_16-56-56.csv'
-                'Sensor fiber characterization/humidified/humid_4_2025-03-24_18-56-42.csv'
+                #'Sensor fiber characterization/humidified/humid_4_2025-03-24_18-56-42.csv'
+                'Sensor fiber characterization/long run/oldthreadsensorfiber_500x_everythingtightened_2025-01-03_03-58-42.csv'
+                #''
                 ]
 input_dmms = [\
              #'sensor fibers/oldthread_sensorfiber_5x_1-dmm-11.csv',\
@@ -36,7 +38,9 @@ input_dmms = [\
              #'Sensor fiber characterization/humidified/humid_1-dmm-11.csv'
              #'Sensor fiber characterization/humidified/humid_2-dmm-11.csv'
              #'Sensor fiber characterization/humidified/humid_3-dmm-11.csv'
-             'Sensor fiber characterization/humidified/humid_4-dmm-11.csv'
+             #'Sensor fiber characterization/humidified/humid_4-dmm-11.csv'
+             'Sensor fiber characterization/long run/oldthreadsensorfiber_500x_everythingtightened-dmm-11_trimmed.csv'
+             #''
              ]
 output_filenames = [\
                     #'sensor fibers\oldthread_sensorfiber_5x_1_synced.csv',\
@@ -52,7 +56,9 @@ output_filenames = [\
                     #'Sensor fiber characterization/humidified/humidified_1-synced.csv'
                     #'Sensor fiber characterization/humidified/humidified_2-synced.csv'
                     #'Sensor fiber characterization/humidified/humidified_3-synced.csv'
-                    'Sensor fiber characterization/humidified/humidified_4-synced.csv'
+                    #'Sensor fiber characterization/humidified/humidified_4-synced.csv'
+                    'Sensor fiber characterization/long run/tightened-synced.csv'
+                    #''
                     ]
 
 for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input_dmms, output_filenames):
@@ -81,7 +87,7 @@ for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input
         t0_ametek = datetime.strptime(row[3], "%H:%M:%S")
         dt = timedelta(days=0, seconds=0, milliseconds=10, microseconds=0)
 
-        for i in range(15):
+        for i in range(9):
             next(reader)
         
         for row in reader:
@@ -97,6 +103,7 @@ for (ametek_filename, dmm_filename, output_filename) in zip(input_ameteks, input
     with open(ametek_filename[:-4] + '_formatted.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         for i in range(len(time_ametek)):
+            print([time_ametek[i], mms[i], Ns[i]])
             writer.writerow([time_ametek[i], mms[i], Ns[i]])
 
     print("Reading DMM data ...")

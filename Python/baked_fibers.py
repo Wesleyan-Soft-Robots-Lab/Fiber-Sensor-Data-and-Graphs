@@ -22,14 +22,22 @@ for i,file in enumerate(files):
     df = pd.read_csv(os.path.join(dataPath,file), header=None)
 
     df["res_change"] = (df[3] - df[3][0])*(df[3][0]**-1) *100 #(Ri − R0) · (R0)^−1
-    x = 30*df[1]/df[1].max() #scale to 30
+    df[1] = 30*df[1]/df[1].max() #scale to 30
     name = f"Sensor Fiber # {i+1}"
+    #valleys /\,/\,/\,/\,/\
+    valley_indexes = df.index[(df[1].shift(1)>= df[1]) & (df[1]< df[1].shift(-1))].to_list()
+    df["cycle"] = 0
+    for x in range(len(valley_indexes)):
+        df.loc[valley_indexes[x]:, "cycle"] = x+1
+        
+    last_cycle = df.loc[df['cycle']==4].copy()
+    last_cycle['cycle_change'] = (last_cycle['res_change'] - last_cycle['res_change'].iloc[0])
 
-    plt.plot(x,df["res_change"], color=palette[i], label=name)
+    plt.plot(last_cycle[1],last_cycle['cycle_change'], color=palette[i], label=name)
 
 # Plot design
-plt.annotate("", xytext=(0, 2), xy=(1, 4), arrowprops=dict(arrowstyle="->"))
-plt.title('Baked Fiber',fontsize=20)
+plt.annotate('', xytext=(0, 1), xy=(2, 2.5), arrowprops=dict(arrowstyle="->"))
+plt.title('Percent Change in Resistance \n within Cycle (Baked)',fontsize=18)
 plt.legend()
 plt.xlabel('Strain (%)', fontsize=15)
 plt.ylabel(u'Δ Resistance (%)',fontsize=15)
